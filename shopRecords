@@ -1,0 +1,28 @@
+# Rachel Morris | HW 5 | Group 5
+
+#1) The placeholder text that displays the full name of the day of the week is %A. 
+
+#2) ALGORITHM:
+#   import csv
+#   import datetime
+#   open/read in the file
+#   look through the items in the list
+#   	split the date into separate numbers on the "/"
+#       assign the numbers a month, day, year with index to later format in our strftime
+#		format our numbers to be able to call
+#		if our dates are on a Saturday or Sunday
+#			print items from those dates
+
+#3)
+import csv
+import datetime
+
+items = csv.DictReader(open("ShopRecords.csv", "r"))
+for row in items:
+    dates = row["Date"].split("/")
+    month = int(dates[0])
+    day = int(dates[1])
+    year = int(dates[2])
+    weekend = datetime.date(year, month, day)
+    if weekend.strftime("%A") == "Saturday" or weekend.strftime("%A") == "Sunday":
+        print(row["Item"])
